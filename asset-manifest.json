@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/raccoon-ccoder.github.io/react-todo/static/js/main.3564d7f9.js",
-    "index.html": "/raccoon-ccoder.github.io/react-todo/index.html",
-    "main.3564d7f9.js.map": "/raccoon-ccoder.github.io/react-todo/static/js/main.3564d7f9.js.map"
+    "main.js": "/react-todo/static/js/main.e7d595ec.js",
+    "index.html": "/react-todo/index.html",
+    "main.e7d595ec.js.map": "/react-todo/static/js/main.e7d595ec.js.map"
   },
   "entrypoints": [
-    "static/js/main.3564d7f9.js"
+    "static/js/main.e7d595ec.js"
   ]
 }
