@@ -17,6 +17,16 @@ function ToDo({ text, category, id }: IToDo) {
     });
   };
 
+  const onDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { name },
+    } = e;
+    setToDos((oldToDos) => {
+      return oldToDos.filter((toDo) => toDo.id !== Number(name));
+    });
+  };
+  console.log(categories, category);
+
   // 버튼 클릭시 카테고리도 변경됨
   return (
     <li>
@@ -24,11 +34,16 @@ function ToDo({ text, category, id }: IToDo) {
       {categories.map((item) => {
         if (item.name !== category)
           return (
-            <button name={item.name} onClick={onClick}>
-              {item.name}
-            </button>
+            <>
+              <button name={item.name} onClick={onClick}>
+                {item.name}
+              </button>
+            </>
           );
       })}
+      <button name={id + ""} onClick={onDelete}>
+        Delete
+      </button>
     </li>
   );
 }

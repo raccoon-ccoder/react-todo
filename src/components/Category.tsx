@@ -1,16 +1,37 @@
-import React from "react";
-import { useResetRecoilState, useRecoilValue, useRecoilState } from "recoil";
-import { toDoState, categoryState, toDoSelector } from "../atoms";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import {
+  useResetRecoilState,
+  useRecoilValue,
+  useRecoilState,
+  useSetRecoilState,
+} from "recoil";
+import {
+  toDoState,
+  categoryState,
+  toDoSelector,
+  ICategory,
+  selectedCategory,
+} from "../atoms";
 
 function Category() {
-  const toDos = useRecoilValue(toDoSelector);
-  const [categories, setCategory] = useRecoilState(categoryState);
+  const [categories, setCategories] = useRecoilState(categoryState);
+  const { register, handleSubmit, setValue } = useForm<ICategory>();
+  const [category, setCategory] = useRecoilState(selectedCategory);
 
   const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(e.currentTarget.value as any);
+    setCategory({ name: e.currentTarget.value as any });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
+  const onSubmit = ({ name }: ICategory) => {
+    const newCategory: ICategory = { name };
+    setCategories((prev) => [newCategory, ...prev]);
+    setValue("name", "");
+  };
+
+  useEffect(() => {
+    setCategory(categories[0]);
+  }, []);
 
   return (
     <>
@@ -21,8 +42,14 @@ function Category() {
         ))}
       </select>
       <h2>add category</h2>
-      <form>
-        <input type="text" placeholder="write category" required />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register("name", {
+            required: "Write Category",
+          })}
+          placeholder="write category"
+        />
+        <button>Add</button>
       </form>
     </>
   );

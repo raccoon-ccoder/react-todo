@@ -12,17 +12,8 @@ import ToDo from "./ToDo";
 import Category from "./Category";
 
 function ToDoList() {
-  // useRecoilState : useRecoilValue + useSetRecoilState (value + modifier fn)
-  const [value, setValue] = useRecoilState(toDoState);
-
   const toDos = useRecoilValue(toDoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
-
-  const toDoList = localStorage.getItem("toDos");
-
-  const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(e.currentTarget.value as any);
-  };
 
   return (
     <div>
