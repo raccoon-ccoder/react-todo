@@ -10,6 +10,7 @@ import { toDoState } from "./atoms";
 import AddCategory from "./components/AddCategory";
 import Board from "./components/Board";
 import DraggableCard from "./components/DraggableCard";
+import TrashCan from "./components/TrashCan";
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,7 +48,13 @@ function App() {
     console.log(info);
     const { destination, source } = info;
     if (!destination) return;
-    if (destination?.droppableId !== source.droppableId) {
+    if (destination.droppableId === "trash") {
+      setToDos((allBoards) => {
+        const sourceBoard = [...allBoards[source.droppableId]];
+        sourceBoard.splice(source.index, 1);
+        return { ...allBoards, [source.droppableId]: sourceBoard };
+      });
+    } else if (destination?.droppableId !== source.droppableId) {
       // cross board movement
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
@@ -92,6 +99,7 @@ function App() {
             ))}
           </Boards>
         </ToDoBox>
+        <TrashCan />
       </Wrapper>
     </DragDropContext>
   );
