@@ -116,12 +116,12 @@ function Board({ toDos, boardId }: IBoardProps) {
         />
       </Form>
       <Droppable droppableId={boardId}>
-        {(magic, snapshot) => (
+        {(provided, snapshot) => (
           <Area
             isDraggingOver={snapshot.isDraggingOver}
             draggingFromThisWith={Boolean(snapshot.draggingFromThisWith)}
-            ref={magic.innerRef}
-            {...magic.droppableProps}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
           >
             {toDos.map((toDo, index) => (
               <DraggableCard
@@ -132,7 +132,7 @@ function Board({ toDos, boardId }: IBoardProps) {
                 boardId={boardId}
               />
             ))}
-            {magic.placeholder}
+            {provided.placeholder}
           </Area>
         )}
       </Droppable>

@@ -95,7 +95,7 @@ function App() {
         <ToDoBox>
           <Boards>
             {Object.keys(toDos).map((boardId) => (
-              <Board boardId={boardId} toDos={toDos[boardId]} />
+              <Board key={boardId} boardId={boardId} toDos={toDos[boardId]} />
             ))}
           </Boards>
         </ToDoBox>

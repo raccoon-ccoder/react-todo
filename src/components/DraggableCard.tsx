@@ -51,14 +51,15 @@ function DraggableCard({
   };
   return (
     <Draggable draggableId={toDoId + ""} index={index}>
-      {(magic, snapshot) => (
+      {(provided, snapshot) => (
         <Card
           isDragging={snapshot.isDragging}
-          ref={magic.innerRef}
-          {...magic.dragHandleProps}
-          {...magic.draggableProps}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
         >
           {toDoText}
+
           <DeleteBtn onClick={onDelete}>X</DeleteBtn>
         </Card>
       )}
